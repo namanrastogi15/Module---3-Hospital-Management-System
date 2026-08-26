@@ -12,7 +12,8 @@ public class PatientService {
 
     private final PatientRepository patientRepository;
 
-    @Transactional
+    @Transactional // Start transcation in hibernate as well
+    // Created this Function all new in this lecture
     public void testPatientTransaction() {
 
         Patient p1 = patientRepository.findById(1L).orElseThrow();
