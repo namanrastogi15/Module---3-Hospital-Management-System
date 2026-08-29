@@ -13,8 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@ToString
 @Getter
+@ToString
 @Setter
 public class Patient {
 
@@ -36,11 +36,11 @@ public class Patient {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // When will you delete the patient then insurance corresponsing to that patient will be deleted
     @JoinColumn(name = "patient_insurance" , unique = true)
     private Insurance insurance; // Owning side for insurance
 
-    @OneToMany(mappedBy = "patient") // Inverse side for appointments
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL) // Inverse side for appointments , When will you delete the patinet then appointment corresponsing to that patient will be deleted as well
     private Set<Appointment> appointments = new HashSet<>();
 
 }
